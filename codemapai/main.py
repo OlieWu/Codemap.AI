@@ -37,10 +37,10 @@ def main():
     #         content = read_file(os.path.join(target_directory, f))
     #         output.write(f"Content of {os.path.join(target_directory, f)}:\n{content}\n\n")
 
-    file_data = ""
+    file_data = []
     for f in files:
         content = read_file(os.path.join(target_directory, f))
-        file_data += f"Content of {os.path.join(target_directory, f)}:\n{content}\n\n"
+        file_data.append((os.path.join(target_directory, f), content))
     # TODO: Call the gpt.py here
     prompt_gpt(file_data)
         
