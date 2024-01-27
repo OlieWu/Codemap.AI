@@ -109,7 +109,7 @@ This is how the output should look:
         message += f"{f[0]}:\n{f[1]}\n\n"
 
     messages.append({"role": "user", "content": message}) 
-    print(message)
+    # print(message)
     # or gpt-4-0613
     chat = client.chat.completions.create(model="gpt-3.5-turbo",
     messages=messages,
