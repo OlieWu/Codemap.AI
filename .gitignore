@@ -4,6 +4,7 @@
 
 # Python
 build
+env/
 *.pyc
 __pycache__/
 *.egg-info*

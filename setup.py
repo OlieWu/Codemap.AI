@@ -18,7 +18,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'codemapai=codemapai.read_file:main',
+            'codemapai=codemapai.main:main',
         ],
     },
     python_requires='>=3.8',
