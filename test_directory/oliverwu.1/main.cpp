@@ -1,0 +1,96 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <queue>
+#include "cpu.h"
+#include "thread.h"
+#include "mutex.h"
+#include "disk.h"
+#include "cv.h"
+
+using std::cout;
+using std::endl;
+
+mutex mutex1;
+mutex mutex2;
+cv cv1;
+
+std::priority_queue<int, std::vector<int>, std::greater<int>> track; // Using a min-heap
+int num_threads = 0;
+
+struct args
+{
+    int requester;
+    char *filename;
+};
+
+void child(void *voidA)
+{
+    // TODO:: ADD LOCKS
+    args *child_args = static_cast<args *>(voidA);
+    int requester = child_args->requester;
+    char *filename = child_args->filename;
+    std::ifstream myfile(filename);
+    if (myfile.is_open())
+    {
+        int num;
+        while (myfile >> num)
+        {
+
+            if (static_cast<int>(track.size()) == num_threads)
+            {
+                int frontElement = track.top();
+                track.pop();
+                // print_request(requester, num);
+                cout << "Service Requester " << requester << " track " << frontElement << endl;
+                track.push(num);
+                // print_service(requester, num);
+                cout << "Requester " << requester << " track " << num << endl;
+            }
+            else
+            {
+                cout << "Requester " << requester << " track " << num << endl;
+                track.push(num);
+            }
+        }
+
+        myfile.close();
+    }
+}
+
+void parent(void *argv)
+{
+    mutex1.lock();
+    char **argv1 = reinterpret_cast<char **>(argv);
+
+    num_threads = atoi(argv1[1]);
+
+    for (int i = 2; i < num_threads + 2; ++i)
+    // TODO: check here if i is correct
+    // pass in a what i is here... for requester?
+    {
+        args a = {i - 2, argv1[i]};
+        void *voidA = static_cast<void *>(&a);
+        thread t(child, voidA);
+        t.join();
+    }
+
+    // Notify that all threads are done
+    cv1.signal();
+    mutex1.unlock();
+}
+
+int main(int argc, char *argv[])
+{
+    // argv [0] is num requesters
+    // read in each file in argv
+
+    cpu::boot(parent, argv, 0);
+
+    // Wait for all threads to finish
+    mutex1.lock();
+    cv1.wait(mutex1);
+    mutex1.unlock();
+
+    return 0;
+}
