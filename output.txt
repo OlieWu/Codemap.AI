@@ -1,0 +1,24 @@
+Content of test_directory/test2.txt:
+Hello, this is a test file with random content for testing purposes.
+
+Content of test_directory/test1.py:
+nums = [1, 2, 3]
+
+for n in nums:
+    print(nums)
+    
+
+Content of test_directory/test_directory_2/test3.html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This is a test.</title>
+</head>
+<body>
+    
+</body>
+</html>
+
