@@ -20,7 +20,7 @@ Given an input formatted as such: 'filename1' code_for_filename_1, 'filename2' c
 You can generate code dependencies to see how the files interact with each other and create ASCII diagrams for
 code interactions. In your output, only create an ASCII diagram for the files.
 Within each ASCII diagram, only list the functions that interact with other files. 
-                 DO NOT include any imports/modules in the diagram. I REPEAT DO NOT include any imports/modules in the diagram.
+                DO NOT include any imports/modules in the diagram. I REPEAT DO NOT include any imports/modules in the diagram.
 This is an example of how an output should be formatted:
 +---------------------+                 +---------------------+
 |      File 1         |                 |      File 3         |
@@ -49,6 +49,7 @@ This is an example of how an output should be formatted:
         
     for chunk in chat:
         print((chunk.choices[0].delta.content), end="")
+
     messages.append({"role": "assistant", "content": chat}) 
     # return chat
     # TODO: Exit message

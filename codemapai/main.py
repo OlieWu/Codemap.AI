@@ -23,7 +23,10 @@ def aggregate_files(directory, ignore):
 
 def main():
     # TODO: Make sure the number of arguments is right
-    # TODO: Remove the list of ignored files
+    if len(sys.argv) != 2:
+        print("Usage: codemapai <directory> --ignore <filename>")
+        sys.exit(1)
+
     target_directory = sys.argv[1]
     ignored_files = sys.argv[3:]
 
