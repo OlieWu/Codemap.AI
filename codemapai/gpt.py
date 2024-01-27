@@ -50,6 +50,6 @@ This is an example of how an output should be formatted:
     for chunk in chat:
         print((chunk.choices[0].delta.content), end="")
 
-    messages.append({"role": "assistant", "content": chat}) 
+    # messages.append({"role": "assistant", "content": chunk.choices[0].delta.content}) 
     # return chat
     # TODO: Exit message

@@ -32,13 +32,20 @@ def main():
 
     files = aggregate_files(target_directory, ignored_files)
     # print(files)
-    with open("output.txt", 'w') as output:
-        for f in files:
-            content = read_file(os.path.join(target_directory, f))
-            output.write(f"Content of {os.path.join(target_directory, f)}:\n{content}\n\n")
+    # with open("output.txt", 'w') as output:
+    #     for f in files:
+    #         content = read_file(os.path.join(target_directory, f))
+    #         output.write(f"Content of {os.path.join(target_directory, f)}:\n{content}\n\n")
 
-        # TODO: Call the gpt.py here
-        prompt_gpt(output)
+    file_data = ""
+    for f in files:
+        content = read_file(os.path.join(target_directory, f))
+        file_data += f"Content of {os.path.join(target_directory, f)}:\n{content}\n\n"
+    # TODO: Call the gpt.py here
+    prompt_gpt(file_data)
+        
+
+    
         
 
 
