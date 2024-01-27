@@ -11,8 +11,8 @@ api_key = os.getenv('GPT_KEY')
 # Then initiate the OpenAI client with the api_key.
 client = OpenAI(api_key = api_key)
 
-
-def prompt_gpt(message):
+        
+def prompt_gpt(file_data):
     messages = [{"role": "system", "content": """You are an intelligent code analyzer. 
 Use the following step-by-step instructions to respond to user inputs.
 1. given an input such as 'filename1' code_for_filename_1, 'filename2' code_for_filename_2 etc... Parse through all the code and 
@@ -59,7 +59,14 @@ This is how the output should look:
                  
                  Only include this ASCII diagram in your output."""}]
 
+    # with open('./test/input.txt', 'r') as file:
+        # message = file.read()
+    message = ""
+    for f in file_data:
+        message += f"{f[0]}:\n{f[1]}\n\n"
+
     messages.append({"role": "user", "content": message}) 
+    print(message)
     # or gpt-4-0613
     chat = client.chat.completions.create(model="gpt-3.5-turbo",
     messages=messages,
@@ -68,6 +75,7 @@ This is how the output should look:
     stream=True,
     max_tokens=500)
     
+    # file.close()
     for chunk in chat:
         content = chunk.choices[0].delta.content
         if content is not None:
@@ -76,5 +84,15 @@ This is how the output should look:
             else: 
                 print(content, end="")
     return chat
+        
+        # return chat
+    # Exit message
+            
+def main():
+    # Initialize chat history
+    chat = run_gpt()
     
-    # return chat
+   
+
+if __name__ == "__main__":
+    main()

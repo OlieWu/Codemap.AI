@@ -45,16 +45,20 @@ def main():
             flag = False
 
     files = aggregate_files(target_directory, ignored_files)
-    combined_content = ""
+    # print(files)
+    # with open("output.txt", 'w') as output:
+    #     for f in files:
+    #         content = read_file(os.path.join(target_directory, f))
+    #         output.write(f"Content of {os.path.join(target_directory, f)}:\n{content}\n\n")
+
+    file_data = []
     for f in files:
         content = read_file(os.path.join(target_directory, f))
-        combined_content += f"Content of {os.path.join(target_directory, f)}:\n{content}\n\n"
-
-    # print(combined_content)
-
+        file_data.append((os.path.join(target_directory, f), content))
     # TODO: Call the gpt.py here
-    prompt_gpt(combined_content)
+    prompt_gpt(file_data)
         
+
 
 
 if __name__ == "__main__":
