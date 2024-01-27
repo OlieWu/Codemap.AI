@@ -1,6 +1,6 @@
 import sys
 import os
-from gpt import prompt_gpt
+from .gpt import prompt_gpt
 
 
 def read_file(file):
@@ -13,8 +13,18 @@ def read_file(file):
 def aggregate_files(directory, ignore):
     """Function that goes through all the files in a directory."""
     file_list = []
+    valid_extensions = {"py", "cpp", "c", "h", "js", "html", "java", "json", "xml", "php", "rb", "txt"}
+
     for root, subdirs, files in os.walk(directory):
         for f in files:
+            f_name, _, extension = f.partition(".")
+            # ignore irrelevant extensions
+            if extension not in valid_extensions:
+                continue
+            # ignore package.json and config.json
+            if extension == "json" and (f_name == "package" or f_name == "config"):
+                continue
+            # relevant files that we DO want to include
             path = os.path.relpath(os.path.join(root, f), directory)
             if path not in ignore:
                 file_list.append(path)
@@ -44,6 +54,11 @@ def main():
         else:
             flag = False
 
+    if int(diagram_type) == 1:
+        diagram_type = "system"
+    else:
+        diagram_type = "file"
+
     files = aggregate_files(target_directory, ignored_files)
     # print(files)
     # with open("output.txt", 'w') as output:
@@ -56,7 +71,7 @@ def main():
         content = read_file(os.path.join(target_directory, f))
         file_data.append((os.path.join(target_directory, f), content))
     # TODO: Call the gpt.py here
-    prompt_gpt(file_data)
+    prompt_gpt(file_data, diagram_type)
         
 
 
