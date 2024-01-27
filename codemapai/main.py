@@ -1,6 +1,6 @@
 import sys
 import os
-from gpt import prompt_gpt
+from .gpt import prompt_gpt
 
 
 def read_file(file):
@@ -53,6 +53,11 @@ def main():
             print("Invalid choice. Please enter 1 or 2.")
         else:
             flag = False
+
+    if int(diagram_type) == 1:
+        diagram_type = "system"
+    else:
+        diagram_type = "file"
 
     files = aggregate_files(target_directory, ignored_files)
     # print(files)
