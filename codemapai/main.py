@@ -71,7 +71,7 @@ def main():
         content = read_file(os.path.join(target_directory, f))
         file_data.append((os.path.join(target_directory, f), content))
     # TODO: Call the gpt.py here
-    prompt_gpt(file_data)
+    prompt_gpt(file_data, diagram_type)
         
 
 
