@@ -55,7 +55,8 @@ This is how the output should look:
 | - File1.function1   |
 +---------------------+
                  
-Only include this ASCII diagram in your output."""
+On the bottom of the diagram include a short summary on what the files and components are doing as well as the purpose of the system as a whole if possible.
+Only include the diagram and the summary in the ouput."""
 
 system_diagram_prompt = """You are an intelligent code analyzer that will analyze code and group it into categories of a web system. Use the following step-by-step instructions to respond to user inputs.
 
@@ -106,8 +107,9 @@ Output Example:
 +---------------------+
 | - File3             |
 +---------------------+
-                                       |
-Include only this ASCII diagram in your output."""
+                                       
+On the bottom of the diagram include a short summary on what the files and components are doing as well as the purpose of the system as a whole if possible.
+Only include the diagram and the summary in the ouput."""
         
 def prompt_gpt(file_data, diagram_type):
     
@@ -137,5 +139,6 @@ def prompt_gpt(file_data, diagram_type):
                 print(content[:-4], end="")
             else: 
                 print(content, end="")
+    print("\n")
     return chat
         
