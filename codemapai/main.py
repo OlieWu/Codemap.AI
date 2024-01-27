@@ -1,6 +1,6 @@
 import sys
 import os
-from .gpt import prompt_gpt
+from gpt import prompt_gpt
 
 
 def read_file(file):
@@ -24,21 +24,36 @@ def aggregate_files(directory, ignore):
 def main():
     # TODO: Make sure the number of arguments is right
     if len(sys.argv) != 2:
-        print("Usage: codemapai <directory> --ignore <filename>")
+        print("Usage: codemapai <directory> --ignore <filename1> <filename2> ... <filenameN>")
         sys.exit(1)
 
     target_directory = sys.argv[1]
     ignored_files = sys.argv[3:]
 
-    files = aggregate_files(target_directory, ignored_files)
-    # print(files)
-    with open("output.txt", 'w') as output:
-        for f in files:
-            content = read_file(os.path.join(target_directory, f))
-            output.write(f"Content of {os.path.join(target_directory, f)}:\n{content}\n\n")
+    # Prompt user to pick diagram type
+    print("Diagram Options:")
+    print("1: System diagram")
+    print("2: File diagram")
+    diagram_type = ""
+    flag = True
+    while flag:
+        diagram_type = input("What type of diagram would you like: ")
 
-        # TODO: Call the gpt.py here
-        prompt_gpt(output)
+        if diagram_type not in ['1','2']:
+            print("Invalid choice. Please enter 1 or 2.")
+        else:
+            flag = False
+
+    files = aggregate_files(target_directory, ignored_files)
+    combined_content = ""
+    for f in files:
+        content = read_file(os.path.join(target_directory, f))
+        combined_content += f"Content of {os.path.join(target_directory, f)}:\n{content}\n\n"
+
+    # print(combined_content)
+
+    # TODO: Call the gpt.py here
+    prompt_gpt(combined_content)
         
 
 
