@@ -1,0 +1,16 @@
+"File 1:
+import module2
+import module3
+
+def function1():
+    module2.function2()
+    module3.function3()
+
+File 2:
+def function2():
+    pass
+
+File 3:
+import module2
+def function3():
+    module1.function1()"

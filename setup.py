@@ -16,5 +16,10 @@ setuptools.setup(
         'openai==1.10.0',
         'python-dotenv',
     ],
+    entry_points={
+        'console_scripts': [
+            'codemapai=codemapai.main:main',
+        ],
+    },
     python_requires='>=3.8',
 )
