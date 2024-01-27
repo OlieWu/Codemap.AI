@@ -1,6 +1,6 @@
 import sys
 import os
-from .gpt import
+from .gpt import prompt_gpt
 
 
 def read_file(file):
@@ -35,6 +35,7 @@ def main():
             output.write(f"Content of {os.path.join(target_directory, f)}:\n{content}\n\n")
 
         # TODO: Call the gpt.py here
+        prompt_gpt(output)
         
 
 
