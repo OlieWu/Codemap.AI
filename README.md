@@ -18,3 +18,5 @@ CodeMap AI can efficiently produce very easy-to-understand and concise diagrams 
 The process of creating CodeMap AI greatly enhanced our understanding of the capabilities of generative AI. We have garnered a greater appreciation for the boundless potential of generative AI in enhancing the efficiency of developers, eliminating the need to engage in time-consuming, mundane tasks. It is also the first Python package that all members of the team have ever created and released publicly.
 ## What's next for CodeMap AI
 Our next step is to integrate CodeMap AI with Visual Studio Code as an extension to allow for even greater ease of access. We would also like to make CodeMap AI scalable through distributed systems, allowing for the generation of larger-scale diagrams on larger codebases. 
+
+**Created at SpartaHack 9**
