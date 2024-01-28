@@ -142,7 +142,7 @@ def prompt_gpt(file_data, diagram_type):
     # print(message)
     # or gpt-4-0613
     # gpt-3.5-turbo
-    cur_model = "gpt-4-0613"
+    # cur_model = "gpt-4-0613"
     cur_model = "gpt-3.5-turbo"
     chat = client.chat.completions.create(model=cur_model,
                                           messages=messages,
