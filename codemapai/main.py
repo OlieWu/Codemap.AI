@@ -13,8 +13,7 @@ def read_file(file):
 def aggregate_files(directory, ignore):
     """Function that goes through all the files in a directory."""
     file_list = []
-    valid_extensions = {"py", "cpp", "c", "h", "js",
-                        "html", "java", "json", "xml", "php", "rb", "txt"}
+    valid_extensions = {"py", "cpp", "c", "h", "js", "go", "html", "java", "json", "xml", "php", "rb", "txt", "yml", "yaml"}
 
     for root, subdirs, files in os.walk(directory):
         for f in files:
@@ -58,6 +57,7 @@ def main():
 
     diagram_type = "system" if int(diagram_type) == 1 else "file"
 
+    print("\n")
     files = aggregate_files(target_directory, ignored_files)
     file_data = []
     for f in files:
