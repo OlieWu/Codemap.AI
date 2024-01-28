@@ -122,7 +122,7 @@ def prompt_gpt(file_data, diagram_type):
     messages.append({"role": "user", "content": message}) 
     # print(message)
     # or gpt-4-0613
-    chat = client.chat.completions.create(model="gpt-3.5-turbo",
+    chat = client.chat.completions.create(model="gpt-4-0613",
     messages=messages,
     temperature=0,
     n=1,
