@@ -43,8 +43,8 @@ def main():
 
     # Prompt user to pick diagram type
     print("Diagram Options:")
-    print("1: System diagram")
-    print("2: File diagram")
+    print("1: File diagram")
+    print("2: System diagram")
     diagram_type = ""
     flag = True
     while flag:
@@ -60,6 +60,7 @@ def main():
     else:
         diagram_type = "file"
 
+    print("\n")
     files = aggregate_files(target_directory, ignored_files)
     # print(files)
     # with open("output.txt", 'w') as output:
