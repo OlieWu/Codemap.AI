@@ -1,6 +1,6 @@
 import sys
 import os
-from .gpt import prompt_gpt
+from gpt import prompt_gpt
 
 
 def read_file(file):

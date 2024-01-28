@@ -118,6 +118,14 @@ Output Example:
 On the bottom of the diagram include a short summary on what the files and components are doing as well as the purpose of the system as a whole if possible.
 Only include the diagram and the summary in the ouput."""
 
+system_component_prompt = """You are an intelligent code analyzer that can analyze code and group it into categories of a web system.
+Use the following instructions to respond to user inputs. Based on the previous code analyzed, diagram generated, and responses you will...
+Answer questions on specific system components. By telling the user know how the component works with other files and components as well as what the specific component does in the scope of all files."""
+
+file_component_prompt = """You are an intelligent code analyzer that can analyze files and see how said files interact with each other.
+Use the following instructions to respond to user inputs. Based on the previous code analyzed, diagram generated, and responses you will...
+Answer questions on specific files by telling the user how the file interacts with other files as what the specific file does in the scope of all files."""
+
 
 def prompt_gpt(file_data, diagram_type):
 
@@ -134,7 +142,9 @@ def prompt_gpt(file_data, diagram_type):
     # print(message)
     # or gpt-4-0613
     # gpt-3.5-turbo
-    chat = client.chat.completions.create(model="gpt-4-0613",
+    cur_model = "gpt-4-0613"
+    cur_model = "gpt-3.5-turbo"
+    chat = client.chat.completions.create(model=cur_model,
                                           messages=messages,
                                           temperature=0.1,
                                           n=1,
@@ -150,4 +160,29 @@ def prompt_gpt(file_data, diagram_type):
             else:
                 print(content, end="")
     print("\n")
+    
+    while True:
+        inquiry = input("What would you like to learn more about?\n")
+        if inquiry.lower() == "exit":
+            break
+        inquiry_messages = [{"role": "system", "content": system_component_prompt if diagram_type ==
+                 "system" else file_component_prompt}]
+        inquiry_messages.append({"role": "user", "content": inquiry})
+        inquiry_chat = client.chat.completions.create(model=cur_model,
+                                          messages=inquiry_messages,
+                                          temperature=0.1,
+                                          n=1,
+                                          stream=True,
+                                          max_tokens=500)
+        print("\n")
+        for chunk in inquiry_chat:
+            content = chunk.choices[0].delta.content
+            if content is not None:
+                if content.endswith("None"):
+                    print(content[:-4], end="")
+                else:
+                    print(content, end="")
+        print("\n")
+        
+
     return chat
