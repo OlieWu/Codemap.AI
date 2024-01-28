@@ -13,7 +13,8 @@ def read_file(file):
 def aggregate_files(directory, ignore):
     """Function that goes through all the files in a directory."""
     file_list = []
-    valid_extensions = {"py", "cpp", "c", "h", "js", "html", "java", "json", "xml", "php", "rb", "txt"}
+    valid_extensions = {"py", "cpp", "c", "h", "js",
+                        "html", "java", "json", "xml", "php", "rb", "txt"}
 
     for root, subdirs, files in os.walk(directory):
         for f in files:
@@ -34,7 +35,8 @@ def aggregate_files(directory, ignore):
 def main():
     # TODO: Make sure the number of arguments is right
     if len(sys.argv) != 2:
-        print("Usage: codemapai <directory> --ignore <filename1> <filename2> ... <filenameN>")
+        print(
+            "Usage: codemapai <directory> --ignore <filename1> <filename2> ... <filenameN>")
         sys.exit(1)
 
     target_directory = sys.argv[1]
@@ -42,34 +44,27 @@ def main():
 
     # Prompt user to pick diagram type
     print("Diagram Options:")
-    print("1: File diagram")
-    print("2: System diagram")
+    print("1: System diagram")
+    print("2: File diagram")
     diagram_type = ""
     flag = True
     while flag:
         diagram_type = input("What type of diagram would you like: ")
 
-        if diagram_type not in ['1','2']:
+        if diagram_type not in ['1', '2']:
             print("Invalid choice. Please enter 1 or 2.")
         else:
             flag = False
 
-    print("\n")
-    files = aggregate_files(target_directory, ignored_files)
-    # print(files)
-    # with open("output.txt", 'w') as output:
-    #     for f in files:
-    #         content = read_file(os.path.join(target_directory, f))
-    #         output.write(f"Content of {os.path.join(target_directory, f)}:\n{content}\n\n")
+    diagram_type = "system" if int(diagram_type) == 1 else "file"
 
+    files = aggregate_files(target_directory, ignored_files)
     file_data = []
     for f in files:
         content = read_file(os.path.join(target_directory, f))
         file_data.append((os.path.join(target_directory, f), content))
     # TODO: Call the gpt.py here
-    prompt_gpt(file_data)
-        
-
+    prompt_gpt(file_data, diagram_type)
 
 
 if __name__ == "__main__":
