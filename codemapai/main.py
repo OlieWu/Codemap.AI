@@ -34,7 +34,8 @@ def aggregate_files(directory, ignore):
 def main():
     # TODO: Make sure the number of arguments is right
     if len(sys.argv) != 2:
-        print("Usage: codemapai <directory> --ignore <filename1> <filename2> ... <filenameN>")
+        print(
+            "Usage: codemapai <directory> --ignore <filename1> <filename2> ... <filenameN>")
         sys.exit(1)
 
     target_directory = sys.argv[1]
@@ -49,7 +50,7 @@ def main():
     while flag:
         diagram_type = input("What type of diagram would you like: ")
 
-        if diagram_type not in ['1','2']:
+        if diagram_type not in ['1', '2']:
             print("Invalid choice. Please enter 1 or 2.")
         else:
             flag = False
@@ -72,8 +73,6 @@ def main():
         file_data.append((os.path.join(target_directory, f), content))
     # TODO: Call the gpt.py here
     prompt_gpt(file_data, diagram_type)
-        
-
 
 
 if __name__ == "__main__":
