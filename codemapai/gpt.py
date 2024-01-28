@@ -119,6 +119,15 @@ On the bottom of the diagram include a short summary on what the files and compo
 Only include the diagram and the summary in the ouput."""
 
 
+system_component_prompt = """You are an intelligent code analyzer that can analyze code and group it into categories of a web system.
+Use the following instructions to respond to user inputs. Based on the previous code analyzed, diagram generated, and responses you will...
+Answer questions on specific system components. By telling the user know how the component works with other files and components as well as what the specific component does in the scope of all files."""
+
+file_component_prompt = """You are an intelligent code analyzer that can analyze files and see how said files interact with each other.
+Use the following instructions to respond to user inputs. Based on the previous code analyzed, diagram generated, and responses you will...
+Answer questions on specific files. By telling the user how the file interacts with other files and components as well as what the specific file does in the scope of all files."""
+
+
 def prompt_gpt(file_data, diagram_type):
 
     messages = [{"role": "system", "content": system_diagram_prompt if diagram_type ==
@@ -134,7 +143,7 @@ def prompt_gpt(file_data, diagram_type):
     # print(message)
     # or gpt-4-0613
     # gpt-3.5-turbo
-    chat = client.chat.completions.create(model="gpt-4-0613",
+    chat = client.chat.completions.create(model="gpt-3.5-turbo",
                                           messages=messages,
                                           temperature=0.1,
                                           n=1,
