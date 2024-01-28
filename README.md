@@ -1,5 +1,8 @@
-# Codemap.AI
+# CodeMap AI
 Have you ever struggled to understand the codebase for a project? Too many files to go through and digest? CodeMap AI tackles this very issue by streamlining file connections for rapid comprehension!
+## Access code:
+Download and use our project package at: https://pypi.org/project/codemapai/ 
+See our demo at: https://devpost.com/software/codemap-ai
 ## Inspiration
 Onboarding at a new company with a complex codebase can be very daunting, and the sheer number of files in a project can be too much to digest in a reasonable timeframe. This can lead to time being wasted or inefficiently utilized on simply trying to catch up with what has been done by former and existing developers, rather than being able to contribute meaningful work immediately. Eliminating this major time commitment in the early stages can greatly enhance new-member productivity in anywhere from academia to the workforce.
 ## What it does
