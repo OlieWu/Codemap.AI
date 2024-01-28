@@ -141,18 +141,13 @@ def prompt_gpt(file_data, diagram_type):
     messages = [{"role": "system", "content": system_diagram_prompt if diagram_type ==
                  "system" else file_diagram_prompt}]
 
-    # with open('./test/input.txt', 'r') as file:
-    # message = file.read()
     message = ""
     for f in file_data:
         message += f"{f[0]}:\n{f[1]}\n\n"
 
     messages.append({"role": "user", "content": message})
-    # print(message)
-    # or gpt-4-0613
-    # gpt-3.5-turbo
-    # cur_model = "gpt-4-0613"
-    cur_model = "gpt-3.5-turbo"
+    cur_model = "gpt-4-0613"
+    # cur_model = "gpt-3.5-turbo"
     chat = client.chat.completions.create(model=cur_model,
                                           messages=messages,
                                           temperature=0.1,
@@ -160,7 +155,6 @@ def prompt_gpt(file_data, diagram_type):
                                           stream=True,
                                           max_tokens=500)
 
-    # file.close()
     for chunk in chat:
         content = chunk.choices[0].delta.content
         if content is not None:
