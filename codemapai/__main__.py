@@ -1,6 +1,6 @@
 import sys
 import os
-from gpt import prompt_gpt
+from .gpt import prompt_gpt
 
 
 def read_file(file):
@@ -32,7 +32,6 @@ def aggregate_files(directory, ignore):
 
 
 def main():
-    # TODO: Make sure the number of arguments is right
     if len(sys.argv) != 2:
         print(
             "Usage: codemapai <directory> --ignore <filename1> <filename2> ... <filenameN>")
@@ -55,15 +54,18 @@ def main():
         else:
             flag = False
 
-    diagram_type = "system" if int(diagram_type) == 1 else "file"
+    if int(diagram_type) == 1:
+        diagram_type = "system"
+    else:
+        diagram_type = "file"
 
     print("\n")
     files = aggregate_files(target_directory, ignored_files)
+
     file_data = []
     for f in files:
         content = read_file(os.path.join(target_directory, f))
         file_data.append((os.path.join(target_directory, f), content))
-    # TODO: Call the gpt.py here
     prompt_gpt(file_data, diagram_type)
 
 

@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='codemapai',
-    version='0.1.0',
+    version='0.2.0',
     author='Ricky Ho, Oliver Wu, Temin Ghong, Andy Huang',
     author_email='horicky78@gmail.com, oliverwu@umich.edu, tghong@umich.edu, huandy@umich.edu',
     description='A diagram generator that creates ASCII diagrams of projects using generative AI',
@@ -18,7 +18,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'codemapai=codemapai.main:main',
+            'codemapai=codemapai.__main__:main',
         ],
     },
     python_requires='>=3.8',
